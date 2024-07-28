@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import CryptoJS from 'crypto-js';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -50,7 +50,7 @@ const LiveQuizes = () => {
         }
     };
 
-    const handleGenerateQR = useCallback(async () => {
+    const handleGenerateQR = async () => {
         const res = await apiEndpoints.createLiveQuiz({ quizId });
 
         const qrExpire = new Date().getTime() + 3010;
@@ -68,9 +68,9 @@ const LiveQuizes = () => {
         setQuizCredentails(quizRoomCredentials)
 
         // eslint-disable-next-line
-    }, [quizId]);
+    };
 
-    const handleEndQuiz = useCallback(async () => {
+    const handleEndQuiz = async () => {
         setLoading(true)
         try {
             const res = await apiEndpoints.endQuiz(quizId)
@@ -90,7 +90,7 @@ const LiveQuizes = () => {
             setLoading(false)
         }
 
-    }, [quizId, navigate]);
+    };
 
     return (
         <section className="min-h-screen flex justify-center items-center">

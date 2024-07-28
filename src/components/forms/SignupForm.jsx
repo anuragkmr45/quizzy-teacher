@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, memo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
@@ -15,7 +15,7 @@ const LoginForm = () => {
 
     const navigate = useNavigate();
 
-    const handleEmailLogin = useCallback(async () => {
+    const handleEmailLogin = async () => {
 
         if (email === '' || password === '') {
             showErrorToast("Email and password can't be empty")
@@ -45,15 +45,11 @@ const LoginForm = () => {
             console.error('Email must end with "@soa.ac.in"');
             showErrorToast("Only College Email is applicable")
         }
-    }, [email, password, navigate]);
+    };
 
-    const togglePasswordVisibility = useMemo(() => {
-        try {
-            setShowPass(!showPass);
-        } catch (error) {
-            console.error('Error while show password: ', error);
-        }
-    }, [showPass]);
+    const togglePasswordVisibility = () => {
+        setShowPass(!showPass);
+    };
 
     return (
         <div className="flex flex-col items-center">
@@ -97,4 +93,4 @@ const LoginForm = () => {
     )
 }
 
-export default memo(LoginForm);
+export default LoginForm;

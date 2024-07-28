@@ -1,8 +1,6 @@
-import { useMemo, memo } from 'react';
-
 const AlertBox = () => {
 
-    const handleDownload = useMemo(() => {
+    const handleDownload = () => {
         // Get the image URL
         const imageUrl = "https://firebasestorage.googleapis.com/v0/b/brandladder-webapp.appspot.com/o/general%2FWhatsApp%20Image%202024-03-15%20at%2018.13.54_42ab5567.jpg?alt=media&token=2e7f4c53-780d-4b48-bf82-36985bbd5be0";
         // Create an anchor element
@@ -17,7 +15,7 @@ const AlertBox = () => {
         document.body.removeChild(link);
 
         // eslint-disable-next-line
-    }, []);
+    };
 
     return (
         <div className="alert alert-info">
@@ -41,4 +39,4 @@ const AlertBox = () => {
     )
 }
 
-export default memo(AlertBox);
+export default AlertBox;

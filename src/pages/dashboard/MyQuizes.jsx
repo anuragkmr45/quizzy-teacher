@@ -20,8 +20,7 @@ const QuizEntry = () => {
             const userToken = localStorage.getItem('authToken');
 
             const response = await apiEndpoints.getMyQuizzes(userToken);
-            // console.log(response)
-            // Assuming the response.data contains the array of quizzes
+
             setQuizzes(response.data.quizzes);
             setLoading(false)
         } catch (error) {

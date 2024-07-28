@@ -9,7 +9,7 @@ import DashBoard from '../../components/frames/Dashboard';
 
 const { showErrorToast } = lazy(() => import('../../components/tosters/notifications'));
 const QuestionCard = lazy(() => import('../../components/card/question-card'));
-const AlertBox = lazy(() => import('../../components/tosters/alert'));
+// const AlertBox = lazy(() => import('../../components/tosters/alert'));
 
 
 const AddQuizes = () => {
@@ -96,7 +96,7 @@ const AddQuizes = () => {
     return (
         <DashBoard>
             <Suspense fallback={<h1>loading ..</h1>}>
-                <AlertBox />
+                {/* <AlertBox /> */}
                 <section className='w-11/12 mx-auto py-10'>
                     {
                         jsonData ? (

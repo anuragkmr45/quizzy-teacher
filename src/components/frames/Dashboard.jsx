@@ -1,4 +1,4 @@
-import { useState, useEffect, memo, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SidebarNavigation from '../navbars/Sidebar';
 import TopbarNavigation from '../navbars/Topbar';
@@ -17,7 +17,7 @@ const DashBoard = ({ children }) => {
 
         setTimeout(() => {
             handleCheckAuth();
-        }, 2000);
+        }, 4000);
 
         // Add event listener for window resize
         window.addEventListener('resize', handleResize);
@@ -30,7 +30,7 @@ const DashBoard = ({ children }) => {
         // eslint-disable-next-line
     }, []);
 
-    const handleCheckAuth = useCallback(() => {
+    const handleCheckAuth = () => {
         try {
             const loggedIn = localStorage.getItem('authToken');
             if (!loggedIn) {
@@ -39,7 +39,7 @@ const DashBoard = ({ children }) => {
         } catch (error) {
             console.error('Error while checking auth: ', error);
         }
-    }, [navigate]);
+    };
 
     return (
         <>
@@ -52,4 +52,4 @@ const DashBoard = ({ children }) => {
     );
 };
 
-export default memo(DashBoard);
+export default DashBoard;

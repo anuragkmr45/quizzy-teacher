@@ -1,4 +1,4 @@
-import { useState, memo, useCallback, useMemo } from 'react';
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Clipboard from 'clipboard';
 import apiEndpoints from '../../../services/api';
@@ -31,7 +31,7 @@ const QuizDetailCard = ({ quizTitle, quizId, date }) => {
         day: 'numeric',
     });
 
-    const copyQuizIdToClipboard = useMemo(() => {
+    const copyQuizIdToClipboard = () => {
         // Create a new clipboard instance
         const clipboard = new Clipboard('.copy-button', {
             text: () => quizId
@@ -49,7 +49,7 @@ const QuizDetailCard = ({ quizTitle, quizId, date }) => {
 
         // Manually trigger the click event on the invisible copy button
         document.querySelector('.copy-button').click();
-    }, [quizId]);
+    };
 
     return (
         <div className="card my-5 mx-auto w-11/12 md:max-w-full ">
@@ -82,4 +82,4 @@ const QuizDetailCard = ({ quizTitle, quizId, date }) => {
     );
 };
 
-export default memo(QuizDetailCard);
+export default QuizDetailCard;

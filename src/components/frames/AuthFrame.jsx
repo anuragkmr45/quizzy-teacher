@@ -1,24 +1,24 @@
-import { useEffect, memo } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthFrame = ({ children }) => {
 
     const navigate = useNavigate();
 
+    const checkAuth = () => {
+        try {
+            const loggedIn = localStorage.getItem('loggedIn');
+            if (loggedIn === 'true') {
+                navigate('/dashboard/add-quiz');
+            }
+
+        } catch (error) {
+            console.error("Error while checking auth: ", error);
+        }
+    };
+
     useEffect(() => {
         document.title = 'Quiz App | Authentication';
-
-        const checkAuth = () => {
-            try {
-                const loggedIn = localStorage.getItem('loggedIn');
-                if (loggedIn === 'true') {
-                    navigate('/dashboard/add-quiz');
-                }
-
-            } catch (error) {
-                console.error("Error while checking auth: ", error);
-            }
-        };
 
         setTimeout(() => {
             checkAuth();
@@ -45,4 +45,4 @@ const AuthFrame = ({ children }) => {
     )
 }
 
-export default memo(AuthFrame)
+export default AuthFrame;
