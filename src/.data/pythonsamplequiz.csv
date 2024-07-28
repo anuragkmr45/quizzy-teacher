@@ -1,0 +1,11 @@
+Question,Option1,Option2,Option3,Option4,Answer
+What symbol is used to indicate comments in Python?,//,/*/,#,(--),#
+Which data type is used to store a single character in Python?,int,char,str,bool,str
+How do you declare a variable in Python?,var x;,int x;,x=int;,x=5;,x=5;
+What is the result of 10 / 3 in Python 3.x?,3.33,3.O,3,3.333333333,3.O
+Which of the following is NOT a valid way to start a loop in Python?,for i in range(5):,while True:,do { } while (condition);,"for i in [1, 2, 3, 4, 5]:",do { } while (condition);
+"What will the following code print: print(""Hello"" + 3)",Hello3,HelloHelloHello,Error,Hello,Error
+How do you check the length of a list named 'myList' in Python?,len(myList),myList.length(),length(myList),myList.len(),len(myList)
+Which keyword is used for function definition in Python?,def,func,define,function,def
+What is the output of the following code: print(3 * 'Hello'),Hello3,HelloHelloHello,Hello,Error,HelloHelloHello
+Which of the following is a correct way to write a conditional statement in Python?,if condition then:,if condition {,if condition:,if (condition),if condition:
