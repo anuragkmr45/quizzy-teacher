@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-import LogoutModal from '../../modal/logout-modal';
+import LogoutModal from '../modal/LogoutModal';
 // import Loader from '../../loader/dotedCircel';
 
 import { CiDatabase } from "react-icons/ci";
@@ -31,13 +31,6 @@ const SidebarNavigation = ({ children }) => {
                                     <Link to='/dashboard/add-quiz' className='flex' >
                                         <FaRegFileExcel className='my-auto mx-2' />
                                         <span>Add New Quiz</span>
-                                    </Link>
-                                </li>
-
-                                <li className="menu-item">
-                                    <Link to='/dashboard/make-quiz-live' className='flex' >
-                                        <CiDatabase className='my-auto mx-2' />
-                                        <span>Make Quiz Live</span>
                                     </Link>
                                 </li>
 

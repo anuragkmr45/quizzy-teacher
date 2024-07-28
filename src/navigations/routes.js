@@ -1,23 +1,15 @@
-// import Home from '../pages';
+import Login from '../pages/auth/Signin';
 
-import Login from '../pages/auth/login';
-// import Register from '../pages/auth/signup';
-
-// import Dashboard from '../pages/dashboard';
-import AddQuiz from '../pages/dashboard/quize/add-quiz';
-import LiveQuiz from '../pages/dashboard/quize/live-quiz';
-import MyQuizes from '../pages/dashboard/quize/my-quizes';
-import QuestionBank from '../pages/dashboard/quize/question-bank';
+import AddQuiz from '../pages/dashboard/AddQuizes';
+import LiveQuiz from '../pages/dashboard/QuizEntry';
+import MyQuizes from '../pages/dashboard/MyQuizes';
+import QuestionBank from '../pages/dashboard/QuestionBank';
 
 export const routes = [
     {
         element: <Login />,
         path: '/',
     },
-    // {
-    //     element: <Register />,
-    //     path: '/teacher-register',
-    // },
 
 ]
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdOutlineFeaturedPlayList } from 'react-icons/md';
-import DashBoard from '../../../../components/frames/dashboard';
+import DashBoard from '../../components/frames/Dashboard';
 
 const QuestionBank = () => {
     return (

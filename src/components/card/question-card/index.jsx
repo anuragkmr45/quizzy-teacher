@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, memo, useCallback } from 'react'
 
 const QuestionCard = ({ index, question, option1, option2, option3, option4, answer }) => {
 
@@ -7,7 +7,7 @@ const QuestionCard = ({ index, question, option1, option2, option3, option4, ans
     const [opt3, setOpt3] = useState(false);
     const [opt4, setOpt4] = useState(false);
 
-    const handleAnsMatch = async () => {
+    const handleAnsMatch = useCallback(async () => {
         try {
             if (await option1 !== null && await option1 === answer) {
                 setOpt1(true);
@@ -24,7 +24,7 @@ const QuestionCard = ({ index, question, option1, option2, option3, option4, ans
         } catch (error) {
             console.error('Erro while seearching for correct ans: ', error);
         }
-    }
+    }, [answer, option1, option2, option3, option4])
 
     useEffect(() => {
         handleAnsMatch();
@@ -40,15 +40,13 @@ const QuestionCard = ({ index, question, option1, option2, option3, option4, ans
                         <h3 className='max-w-full text-2xl'>
                             {index + 1}. {question}
                         </h3>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <p className={`text-xl ${opt1 ? 'text-green-500' : 'text-gray-500'} `} >
                                 a. {option1}
                             </p>
                             <p className={`text-xl ${opt2 ? 'text-green-500' : 'text-gray-500'} `} >
                                 b. {option2}
                             </p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
                             <p className={`text-xl ${opt3 ? 'text-green-500' : 'text-gray-500'} `} >
                                 c. {option3}
                             </p>
@@ -63,4 +61,4 @@ const QuestionCard = ({ index, question, option1, option2, option3, option4, ans
     )
 }
 
-export default QuestionCard
+export default memo(QuestionCard);

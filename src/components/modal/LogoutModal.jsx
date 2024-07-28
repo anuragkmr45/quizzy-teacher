@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import apiEndpoints from '../../../services/api';
-import Loader from '../../../components/loader/dotedCircel'
+import Loader from '../loader/dotedCircel';
 
 const LogoutModal = () => {
 
@@ -17,28 +16,28 @@ const LogoutModal = () => {
             }
         } catch (error) {
             console.error('Error while closing modal: ', error)
+            throw new Error('Error while closing modal: ', error)
         }
-    }
+
+    };
 
     const handleLogout = async () => {
         setLoading(true);
         try {
-            const res = await apiEndpoints.logout();
-
-            if (res.status === 200) {
-                handleCloseModal()
-                navigate('/teacher-login');
-            }
+            localStorage.removeItem('authToken');
+            localStorage.clear();
+            navigate('/');
         } catch (error) {
             console.error('Error logging out:', error);
+            throw new Error('Error logging out:', error)
         } finally {
             handleCloseModal()
             setLoading(false);
         }
-    }
+    };
 
     return (
-        <div>
+        <>
             <input className="modal-state" id="logout-modal" type="checkbox" />
             <div className="modal">
                 <label className="modal-overlay"></label>
@@ -61,7 +60,7 @@ const LogoutModal = () => {
                 }
 
             </div>
-        </div>
+        </>
     )
 }
 

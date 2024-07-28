@@ -1,14 +1,15 @@
-import React, { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense, useCallback } from 'react';
 import Select from 'react-select';
 import Papa from 'papaparse';
 import { useNavigate } from 'react-router-dom';
 
-import { topicDtls } from '../../../../.data/subjectData';
-import apiEndpoints from '../../../../services/api';
+import { topicDtls } from '../../.data/subjectData';
+import apiEndpoints from '../../services/api';
+import DashBoard from '../../components/frames/Dashboard';
 
-const QuestionCard = lazy(() => import('../../../../components/card/question-card'));
-const DashBoard = lazy(() => import('../../../../components/frames/dashboard'));
-const AlertBox = lazy(() => import('../../../../components/tosters/alert'));
+const { showErrorToast } = lazy(() => import('../../components/tosters/notifications'));
+const QuestionCard = lazy(() => import('../../components/card/question-card'));
+const AlertBox = lazy(() => import('../../components/tosters/alert'));
 
 
 const AddQuizes = () => {
@@ -21,6 +22,7 @@ const AddQuizes = () => {
     const [selectedSubject, setSelectedSubject] = useState(null);
 
     const navigate = useNavigate()
+
     const handleFileChange = (event) => {
         try {
             const file = event.target.files[0];
@@ -30,9 +32,9 @@ const AddQuizes = () => {
         }
     };
 
-    const handleConvert = () => {
+    const handleConvert = useCallback(() => {
         if (!csvFile) {
-            alert('Please select a CSV file.');
+            showErrorToast('Please select a CSV file.');
             return;
         }
 
@@ -64,22 +66,21 @@ const AddQuizes = () => {
                 setJsonData(finalJsonData);
             },
         });
-    };
+    }, [title, desc, selectedSubject, csvFile]);
 
     const subjectOptions = topicDtls.map((subject) => ({
         value: Object.keys(subject)[0],
         label: Object.values(subject)[0],
     }));
 
-    const handleSubmitQuiz = async () => {
+    const handleSubmitQuiz = useCallback(async () => {
         setLoading(true);
         try {
             if (!jsonData || !jsonData.Title || !jsonData.Questions || !jsonData.Questions.length) {
                 throw new Error('Quiz data is incomplete.');
             }
-            // console.log('jsonData: ', jsonData)
+
             const res = await apiEndpoints.createQuiz(jsonData);
-            // console.log(res)
 
             if (res.status === 201) {
                 navigate('/dashboard/previous-quizes')
@@ -90,11 +91,11 @@ const AddQuizes = () => {
             console.error('Error while submitting quiz: ', error);
             setLoading(false);
         }
-    }
+    }, [jsonData, navigate]);
 
     return (
-        <Suspense fallback={<h1>loeaing ..</h1>}>
-            <DashBoard>
+        <DashBoard>
+            <Suspense fallback={<h1>loading ..</h1>}>
                 <AlertBox />
                 <section className='w-11/12 mx-auto py-10'>
                     {
@@ -169,8 +170,8 @@ const AddQuizes = () => {
                         )
                     }
                 </section>
-            </DashBoard>
-        </Suspense>
+            </Suspense>
+        </DashBoard>
     )
 }
 

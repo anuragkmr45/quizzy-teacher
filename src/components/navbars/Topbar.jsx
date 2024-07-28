@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { CiHome } from 'react-icons/ci';
 import { TiThMenuOutline } from "react-icons/ti";
-import { FaRegFileExcel } from "react-icons/fa";
-
-// import LogoutModal from '../../modal/logout-modal'
 
 const TopBar = ({ children }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -40,10 +37,6 @@ const TopBar = ({ children }) => {
                             <Link to='/dashboard/add-quiz' className="dropdown-item text-sm flex flex-row menu-items">
                                 <CiHome className='my-auto mx-2' />
                                 <span>Add New Quiz</span>
-                            </Link>
-                            <Link to='/dashboard/make-quiz-live' className="dropdown-item text-sm flex flex-row menu-items">
-                                <FaRegFileExcel className='my-auto mx-2' />
-                                <span>Make Quiz Live</span>
                             </Link>
                             <Link to='/dashboard/previous-quizes' className="dropdown-item text-sm flex flex-row menu-items">
                                 <CiHome className='my-auto mx-2' />

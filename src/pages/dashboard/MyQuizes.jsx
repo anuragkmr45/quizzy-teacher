@@ -1,31 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import apiEndpoints from '../../../../services/api'
+import { useState, useEffect } from 'react';
+import apiEndpoints from '../../services/api'
 
-import DashBoard from '../../../../components/frames/dashboard';
-import QuizDetailCard from '../../../../components/card/quiz-details';
+import DashBoard from '../../components/frames/Dashboard';
+import QuizDetailCard from '../../components/card/quiz-details';
 
-const MyQuizes = () => {
+const QuizEntry = () => {
     const [quizzes, setQuizzes] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const fetchQuizzes = async () => {
-            try {
-                setLoading(true)
-                const userToken = localStorage.getItem('authToken');
-
-                const response = await apiEndpoints.getMyQuizzes(userToken);
-                // console.log(response)
-                // Assuming the response.data contains the array of quizzes
-                setQuizzes(response.data.quizzes);
-                setLoading(false)
-            } catch (error) {
-                console.error('Error fetching quizzes:', error);
-                setLoading(false)
-            }
-        };
         fetchQuizzes();
+
+        // eslint-disable-next-line
     }, []);
+
+    const fetchQuizzes = async () => {
+        try {
+            setLoading(true)
+            const userToken = localStorage.getItem('authToken');
+
+            const response = await apiEndpoints.getMyQuizzes(userToken);
+            // console.log(response)
+            // Assuming the response.data contains the array of quizzes
+            setQuizzes(response.data.quizzes);
+            setLoading(false)
+        } catch (error) {
+            console.error('Error fetching quizzes:', error);
+            setLoading(false)
+        }
+    };
 
     return (
         <DashBoard>
@@ -34,7 +37,8 @@ const MyQuizes = () => {
             ) : (
                 quizzes?.length === 0 ? (
                     <h1 className="my-auto text-center">
-                        Data Not Found !!!
+                        Something went wrong <br />
+                        Try again later !!!
                     </h1>
                 ) : (
                     quizzes?.slice().map((data, index) => {
@@ -59,4 +63,4 @@ const MyQuizes = () => {
     )
 }
 
-export default MyQuizes
+export default QuizEntry
