@@ -5,6 +5,7 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 import apiEndpoints from '../../services/api';
 import { showSuccessToast, showErrorToast } from '../../components/tosters/notifications'
+import debounce from 'debounce';
 
 const LoginForm = () => {
 
@@ -15,7 +16,7 @@ const LoginForm = () => {
 
     const navigate = useNavigate();
 
-    const handleEmailLogin = async () => {
+    const handleEmailLogin = debounce(async () => {
 
         if (email === '' || password === '') {
             showErrorToast("Email and password can't be empty")
@@ -45,7 +46,7 @@ const LoginForm = () => {
             console.error('Email must end with "@soa.ac.in"');
             showErrorToast("Only College Email is applicable")
         }
-    };
+    }, 700)
 
     const togglePasswordVisibility = () => {
         setShowPass(!showPass);

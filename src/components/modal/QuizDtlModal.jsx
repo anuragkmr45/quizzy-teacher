@@ -11,7 +11,7 @@ const QuizDtlModal = ({ quizTitle, loading, quizQuestions }) => {
                     <label htmlFor={`quiz-dtl-${quizTitle}`} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
 
                     {loading ? (
-                        <div>Loading...</div>
+                        <h1>Loading..</h1>
                     ) : (
                         <>
                             <h2 className="text-xl">Quiz Title: {quizTitle}</h2>

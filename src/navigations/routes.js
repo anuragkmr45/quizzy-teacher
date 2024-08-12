@@ -1,5 +1,6 @@
 import Login from '../pages/auth/Signin';
 
+import Home from '../pages';
 import AddQuiz from '../pages/dashboard/AddQuizes';
 import LiveQuiz from '../pages/dashboard/QuizEntry';
 import MyQuizes from '../pages/dashboard/MyQuizes';
@@ -29,5 +30,9 @@ export const dashboardRoutes = [
     {
         element: <QuestionBank />,
         path: '/dashboard/question-bank',
+    },
+    {
+        element: <Home />,
+        path: '/test-screen',
     },
 ]

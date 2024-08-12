@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { topicDtls } from '../../.data/subjectData';
 import apiEndpoints from '../../services/api';
 import DashBoard from '../../components/frames/Dashboard';
+import debounce from 'debounce';
 
 const { showErrorToast } = lazy(() => import('../../components/tosters/notifications'));
 const QuestionCard = lazy(() => import('../../components/card/question-card'));
@@ -73,7 +74,7 @@ const AddQuizes = () => {
         label: Object.values(subject)[0],
     }));
 
-    const handleSubmitQuiz = useCallback(async () => {
+    const handleSubmitQuiz = debounce(async () => {
         setLoading(true);
         try {
             if (!jsonData || !jsonData.Title || !jsonData.Questions || !jsonData.Questions.length) {
@@ -91,7 +92,7 @@ const AddQuizes = () => {
             console.error('Error while submitting quiz: ', error);
             setLoading(false);
         }
-    }, [jsonData, navigate]);
+    }, 1000);
 
     return (
         <DashBoard>
