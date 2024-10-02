@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import * as CryptoJS from 'crypto-js'
-import apiEndpoints from '../../services/api';
+import CryptoES from 'crypto-es';
 
+import apiEndpoints from '../../services/api';
 import { showSuccessToast } from '../../components/tosters/notifications';
 import debounce from 'debounce';
 
@@ -56,24 +56,18 @@ const LiveQuizes = () => {
         // eslint-disable-next-line
     }, [])
 
-    const handleEncryptData = (plainText) => {
-        const key = process.env.REACT_APP_ENCRYPTION_KEY
-        const cipherText = CryptoJS.AES.encrypt(plainText, key).toString()
-        return cipherText
-    }
-
     const handleGenerateQR = debounce(async () => {
         const res = await apiEndpoints.createLiveQuiz({ quizId });
 
         const qrExpire = new Date().getTime() + 3010;
-        const quizID = handleEncryptData(res.data.quizID);
-        const quizPass = handleEncryptData(res.data.RoomPassword);
 
         const quizRoomCredentials = JSON.stringify({
             expireDate: qrExpire,
-            id: quizID,
-            pass: quizPass,
+            id: res.data.quizID,
+            pass: res.data.RoomPassword,
         });
+
+        // const encryptedQuizRoomCredentials = handleEncryptData(quizRoomCredentials);
 
         localStorage.setItem('quizCredentails', quizRoomCredentials)
 
